@@ -1,12 +1,10 @@
 package com.example.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name = "article")
 @Entity
-public class Stuff {
+public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,11 +43,11 @@ public class Stuff {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Stuff stuff = (Stuff) o;
+        Article article = (Article) o;
 
-        if (id != null ? !id.equals(stuff.id) : stuff.id != null) return false;
-        if (title != null ? !title.equals(stuff.title) : stuff.title != null) return false;
-        return content != null ? content.equals(stuff.content) : stuff.content == null;
+        if (id != null ? !id.equals(article.id) : article.id != null) return false;
+        if (title != null ? !title.equals(article.title) : article.title != null) return false;
+        return content != null ? content.equals(article.content) : article.content == null;
     }
 
     @Override

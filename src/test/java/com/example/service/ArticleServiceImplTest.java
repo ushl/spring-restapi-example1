@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.domain.Stuff;
-import com.example.repository.StuffRepository;
+import com.example.domain.Article;
+import com.example.repository.ArticleRepository;
 import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -11,17 +11,17 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 
-public class StuffServiceImplTest {
+public class ArticleServiceImplTest {
 
-    private StuffServiceImpl stuffService;
+    private ArticleServiceImpl articleService;
 
     @Mock
-    private StuffRepository stuffRepository;
+    private ArticleRepository articleRepository;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        stuffService = new StuffServiceImpl(stuffRepository);
+        articleService = new ArticleServiceImpl(articleRepository);
     }
 
     @After
@@ -36,27 +36,27 @@ public class StuffServiceImplTest {
 
     @Test
     public void findOne() throws Exception {
-        when(stuffRepository.findOne(anyInt())).thenReturn(new Stuff());
+        when(articleRepository.findOne(anyInt())).thenReturn(new Article());
 
-        Stuff result = stuffService.findOne(42);
+        Article result = articleService.findOne(42);
 
         Assert.assertNotNull(result);
     }
 
     @Test
     public void create() throws Exception {
-        when(stuffRepository.save(isA(Stuff.class))).thenReturn(new Stuff());
+        when(articleRepository.save(isA(Article.class))).thenReturn(new Article());
 
-        Stuff result = stuffService.create(new Stuff());
+        Article result = articleService.create(new Article());
 
         Assert.assertNotNull(result);
     }
 
     @Test
     public void update() throws Exception {
-        when(stuffRepository.save(isA(Stuff.class))).thenReturn(new Stuff());
+        when(articleRepository.save(isA(Article.class))).thenReturn(new Article());
 
-        Stuff result = stuffService.update(new Stuff());
+        Article result = articleService.update(new Article());
 
         Assert.assertNotNull(result);
     }

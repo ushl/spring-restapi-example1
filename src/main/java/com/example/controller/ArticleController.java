@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.domain.Stuff;
-import com.example.service.StuffService;
+import com.example.domain.Article;
+import com.example.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,14 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("/stuff")
+@RequestMapping("/articles")
 @RestController
-public class StuffController {
-    private StuffService stuffService;
+public class ArticleController {
+
+    private ArticleService articleService;
 
     @Autowired
-    public StuffController(StuffService stuffService) {
-        this.stuffService = stuffService;
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
     @RequestMapping(
@@ -27,9 +28,9 @@ public class StuffController {
             consumes = MediaType.ALL_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Page<Stuff>> findAll(Pageable pageable) {
-        Page<Stuff> stuffPage = stuffService.findAll(pageable);
-        return new ResponseEntity<Page<Stuff>>(stuffPage, HttpStatus.OK);
+    public ResponseEntity<Page<Article>> findAll(Pageable pageable) {
+        Page<Article> articlesPage = articleService.findAll(pageable);
+        return new ResponseEntity<Page<Article>>(articlesPage, HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -38,9 +39,9 @@ public class StuffController {
             consumes = MediaType.ALL_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Stuff> findOne(@PathVariable("id") Integer id) {
-        Stuff stuff = stuffService.findOne(id);
-        return new ResponseEntity<Stuff>(stuff, HttpStatus.OK);
+    public ResponseEntity<Article> findOne(@PathVariable("id") Integer id) {
+        Article article = articleService.findOne(id);
+        return new ResponseEntity<Article>(article, HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -50,7 +51,7 @@ public class StuffController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity delete(@PathVariable("id") Integer id) {
-        stuffService.delete(id);
+        articleService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
@@ -60,9 +61,9 @@ public class StuffController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Stuff> create(@RequestBody Stuff stuff) {
-        Stuff stuffSaved = stuffService.create(stuff);
-        return new ResponseEntity<Stuff>(stuffSaved, HttpStatus.CREATED);
+    public ResponseEntity<Article> create(@RequestBody Article article) {
+        Article articleSaved = articleService.create(article);
+        return new ResponseEntity<Article>(articleSaved, HttpStatus.CREATED);
     }
 
     @RequestMapping(
@@ -71,10 +72,10 @@ public class StuffController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Stuff> update(@RequestBody Stuff stuff, @PathVariable("id") Integer id) {
-        stuff.setId(id);
-        Stuff stuffSaved = stuffService.update(stuff);
-        return new ResponseEntity<Stuff>(stuffSaved, HttpStatus.OK);
+    public ResponseEntity<Article> update(@RequestBody Article article, @PathVariable("id") Integer id) {
+        article.setId(id);
+        Article articleSaved = articleService.update(article);
+        return new ResponseEntity<Article>(articleSaved, HttpStatus.OK);
     }
 
 }
